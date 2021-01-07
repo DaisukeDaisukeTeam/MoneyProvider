@@ -1,0 +1,8 @@
+---
+# マネーAPIの読み込み優先度を指定致します、設定にてございます。
+# 上位の項目より、優先的に読み込みを実施致します。
+
+PocketMoney: true
+EconomyAPI: true
+LevelMoneySystem: true
+...
