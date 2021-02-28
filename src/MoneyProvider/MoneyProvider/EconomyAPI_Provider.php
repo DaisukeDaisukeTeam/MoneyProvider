@@ -9,16 +9,16 @@ class EconomyAPI_Provider extends ProviderBase{
 		return $this->MoneyAPI->myMoney($player);
 	}
 
-	public function setMoney($player,float $money){
+	public function setMoney($player, float $money){
 		$this->MoneyAPI->setMoney($player, $money);
 	}
-	
+
 	public function addMoney($player, float $money){
-		$this->MoneyAPI->addMoney($player,$money);
+		$this->MoneyAPI->addMoney($player, $money);
 	}
 
 	public function reduceMoney($player, float $money){
-		$this->MoneyAPI->reduceMoney($player,$money);
+		$this->MoneyAPI->reduceMoney($player, $money);
 	}
 
 	public function existMoney($player, float $money): bool{
