@@ -16,7 +16,7 @@ class MoneyProvider{
 		"MoneySystem_provider" => MoneySystem_provider::class,
 	];
 
-	/** @var ProviderBase|null */
+	/** @var ProviderBase|mixed|null */
 	public static $provider = null;
 
 	public static function init(Config $config){
