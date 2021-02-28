@@ -24,4 +24,11 @@ class MoneySystem_provider extends ProviderBase{
 	public function existMoney($player, float $money): bool{
 		return $this->myMoney($player) >= $money;
 	}
+	
+	public static function getPlugin(){
+		if(Server::getInstance()->getPluginManager()->getPlugin(static::$pluginName) === null){
+			return null;
+		}
+		return API::getInstance();
+	}
 }
