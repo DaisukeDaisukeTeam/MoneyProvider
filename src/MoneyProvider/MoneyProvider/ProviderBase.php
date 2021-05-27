@@ -3,15 +3,37 @@
 namespace MoneyProvider\MoneyProvider;
 
 use pocketmine\Player;
+use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 
 abstract class ProviderBase{
+	/**
+	 * @param Player|string $player
+	 * @return float
+	 */
 	abstract public function myMoney($player): float;
-	abstract public function setMoney($player, float $money);
-	abstract public function addMoney($player, float $money);
-	abstract public function reduceMoney($player, float $money);
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	abstract public function setMoney($player, float $money): void;
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	abstract public function addMoney($player, float $money): void;
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	abstract public function reduceMoney($player, float $money): void;
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
 	abstract public function existMoney($player, float $money): bool;
 
+	/** @var string */
 	public static $pluginName = "";
 
 	/** @var mixed */
@@ -21,6 +43,9 @@ abstract class ProviderBase{
 		$this->MoneyAPI = static::getPlugin();
 	}
 
+	/**
+	 * @return Plugin|null
+	 */
 	public static function getPlugin(){
 		return Server::getInstance()->getPluginManager()->getPlugin(static::$pluginName);
 	}
@@ -31,6 +56,10 @@ abstract class ProviderBase{
 
 	public function getName(): string{
 		return static::$pluginName;
+	}
+
+	public function isEmpty(): bool{
+		return false;
 	}
 
 	/**

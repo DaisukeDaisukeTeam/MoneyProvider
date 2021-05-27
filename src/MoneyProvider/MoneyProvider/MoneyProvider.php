@@ -2,12 +2,13 @@
 
 namespace MoneyProvider\MoneyProvider;
 
+use pocketmine\Player;
 use pocketmine\utils\Config;
 
 class MoneyProvider{
 	/**
 	 * @phpstan-var array<string, class-string<ProviderBase>>
-	 * @var class-string[] $providers
+	 * @var class-string<ProviderBase>[] $providers
 	 */
 	public static $providers = [
 		"PocketMoney" => PocketMoney_Provider::class,
@@ -16,10 +17,10 @@ class MoneyProvider{
 		"MoneySystem_provider" => MoneySystem_provider::class,
 	];
 
-	/** @var ProviderBase|null */
-	public static $provider = null;
+	/** @var ProviderBase */
+	public static $provider;
 
-	public static function init(Config $config){
+	public static function init(Config $config): bool{
 		/**
 		 * @phpstan-var array<string, bool> $providers_All
 		 * @var bool[] $providers_All
@@ -34,35 +35,65 @@ class MoneyProvider{
 			break;
 		}
 		if(self::$provider === null){
+			self::$provider = new EmptyProvider();
 			return false;
 		}
 		return true;
 	}
 
+	/**
+	 * @phpstan-return array<string, class-string<ProviderBase>>
+	 * @return class-string<ProviderBase>[] $providers
+	 */
 	public static function getProviders(){
 		return self::$providers;
 	}
 
+	/**
+	 * @param Player|string $player
+	 * @return float
+	 */
 	public static function myMoney($player): float{
 		return self::$provider->myMoney($player);
 	}
 
-	public static function setMoney($player, float $money){
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	public static function setMoney($player, float $money): void{
 		self::$provider->setMoney($player, $money);
 	}
 
-	public static function addMoney($player, float $money){
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	public static function addMoney($player, float $money): void{
 		self::$provider->addMoney($player, $money);
 	}
 
-	public static function reduceMoney($player, float $money){
+	/**
+	 * @param Player|string $player
+	 * @param float $money
+	 */
+	public static function reduceMoney($player, float $money): void{
 		self::$provider->reduceMoney($player, $money);
 	}
 
+	/**
+	 * @param Player|string $player
+	 * @param int $money
+	 * @return bool
+	 */
 	public static function existMoney($player, int $money): bool{
 		return self::$provider->existMoney($player, $money);
 	}
 
+	public static function isEmpty(): bool{
+		return self::$provider instanceof EmptyProvider;
+	}
+	
 	public static function getName(): string{
 		return self::$provider->getName();
 	}

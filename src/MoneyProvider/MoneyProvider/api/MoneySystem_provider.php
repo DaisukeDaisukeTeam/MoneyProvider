@@ -2,29 +2,36 @@
 
 namespace MoneyProvider\MoneyProvider;
 
+use metowa1227\moneysystem\api\core\API;
+use pocketmine\plugin\Plugin;
+use pocketmine\Server;
+
 class MoneySystem_provider extends ProviderBase{
 	public static $pluginName = "MoneySystem";
 
-	public function myMoney($player): float{
+	public function myMoney($player) : float{
 		return $this->MoneyAPI->get($this->getTranslatedName($player));
 	}
 
-	public function setMoney($player, float $money){
+	public function setMoney($player, float $money): void{
 		$this->MoneyAPI->set($this->getTranslatedName($player), $money);
 	}
 
-	public function addMoney($player, float $money){
+	public function addMoney($player, float $money): void{
 		$this->MoneyAPI->increase($this->getTranslatedName($player), $money);
 	}
 
-	public function reduceMoney($player, float $money){
+	public function reduceMoney($player, float $money): void{
 		$this->MoneyAPI->reduce($this->getTranslatedName($player), $money);
 	}
 
-	public function existMoney($player, float $money): bool{
+	public function existMoney($player, float $money) : bool{
 		return $this->myMoney($player) >= $money;
 	}
-	
+
+	/**
+	 * @return API|Plugin|null
+	 */
 	public static function getPlugin(){
 		if(Server::getInstance()->getPluginManager()->getPlugin(static::$pluginName) === null){
 			return null;

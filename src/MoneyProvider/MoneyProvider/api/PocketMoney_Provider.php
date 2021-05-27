@@ -9,15 +9,15 @@ class PocketMoney_Provider extends ProviderBase{
 		return $this->MoneyAPI->getMoney($this->getTranslatedName($player));
 	}
 
-	public function setMoney($player, float $money){
+	public function setMoney($player, float $money): void{
 		$this->MoneyAPI->setMoney($this->getTranslatedName($player), $money);
 	}
 
-	public function addMoney($player, float $money){
+	public function addMoney($player, float $money): void{
 		$this->MoneyAPI->grantMoney($this->getTranslatedName($player), $money);
 	}
 
-	public function reduceMoney($player, float $money){
+	public function reduceMoney($player, float $money): void{
 		$money = $this->myMoney($player) - $money;
 		if($money < 0){
 			$money = 0;
