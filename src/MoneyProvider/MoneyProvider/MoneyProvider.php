@@ -15,6 +15,9 @@ class MoneyProvider{
 		"EconomyAPI" => EconomyAPI_Provider::class,
 		"LevelMoneySystem" => LevelMoneySystem_Provider::class,
 		"MoneySystem_provider" => MoneySystem_provider::class,
+		"SimpleEconomy" => SimpleEconomy_Provider::class,
+		"BedrockEconomy" => BedrockEconomy_Provider::class,
+		"MixCoinSystem" => MixCoinSystem_Provider::class
 	];
 
 	/** @var ProviderBase */

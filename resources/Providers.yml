@@ -6,4 +6,7 @@ PocketMoney: true
 EconomyAPI: true
 LevelMoneySystem: true
 MoneySystem: true
+SimpleEconomy: true
+BedrockEconomy: true
+MixCoinSystem: true
 ...
